@@ -11,6 +11,7 @@ import com.example.noms.pojo.MealList
 class MostPopularAdapter():RecyclerView.Adapter<MostPopularAdapter.PopularViewHolder>() {
 
     private var mealsList=ArrayList<CategoryMeals>()
+    lateinit var itemClicked:((CategoryMeals)->Unit)
 
     fun  setMeals(mealList: ArrayList<CategoryMeals>){
         this.mealsList=mealList
@@ -21,6 +22,7 @@ class MostPopularAdapter():RecyclerView.Adapter<MostPopularAdapter.PopularViewHo
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularViewHolder {
 
         return PopularViewHolder(PopuerItemBinding.inflate(LayoutInflater.from(parent.context),parent,false))
+
     }
 
     override fun getItemCount(): Int {
@@ -32,5 +34,9 @@ class MostPopularAdapter():RecyclerView.Adapter<MostPopularAdapter.PopularViewHo
         Glide.with(holder.itemView)
             .load(mealsList[position].strMealThumb)
             .into(holder.binding.imgPopularMealItem)
+
+        holder.itemView.setOnClickListener {
+            itemClicked.invoke(mealsList[position])
+        }
     }
 }
