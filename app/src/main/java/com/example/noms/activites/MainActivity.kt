@@ -1,11 +1,11 @@
-package com.example.noms
+package com.example.noms.activites
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
+import com.example.noms.R
 import com.example.noms.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
 
 ////    //? Navigation Setup
         val bottomNavigation=binding.bottomNav
-        navController=Navigation.findNavController(this,R.id.host_fragment)
+        navController=Navigation.findNavController(this, R.id.host_fragment)
         NavigationUI.setupWithNavController(bottomNavigation,navController)
     }
 }
