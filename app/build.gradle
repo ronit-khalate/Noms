@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace 'com.example.noms'
-    compileSdk 34
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.example.noms"
         minSdk 24
-        targetSdk 34
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -50,11 +50,4 @@ dependencies {
     // Navigation Components
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
-
-    //intuit (screen size )
-    implementation 'com.intuit.sdp:sdp-android:1.0.6'
-    implementation 'com.intuit.ssp:ssp-android:1.0.6'
-
-    //gif for Animation
-    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.17'
 }
