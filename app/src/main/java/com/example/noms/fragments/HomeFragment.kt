@@ -10,20 +10,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
-import com.example.noms.R
 import com.example.noms.ViewModel.HomeViewModel
 import com.example.noms.activites.MealActivity
+import com.example.noms.adapters.CategoriesAdapter
 import com.example.noms.adapters.MostPopularAdapter
 import com.example.noms.databinding.FragmentHomeBinding
-import com.example.noms.pojo.CategoryMeals
+import com.example.noms.pojo.MealsByCategory
 import com.example.noms.pojo.Meal
-import com.example.noms.pojo.MealList
-import com.example.noms.retrofit.RetrofitInstance
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 
 class HomeFragment : Fragment() {
@@ -34,6 +30,8 @@ class HomeFragment : Fragment() {
     private lateinit var randomMeal:Meal
 
     private lateinit var popularItemsAdapter:MostPopularAdapter
+
+    private lateinit var categoryAdapter:CategoriesAdapter
 
     companion object{
 
@@ -75,7 +73,28 @@ class HomeFragment : Fragment() {
 
         onPopularItemClick()
 
+        prepareCategoriesRecylcerView()
+        homeVM.getCategories()
+        observeCategoryLiveData()
 
+
+    }
+
+    private fun prepareCategoriesRecylcerView() {
+        categoryAdapter=CategoriesAdapter()
+        binding.recViewCategories.apply {
+            layoutManager=GridLayoutManager(context,3,GridLayoutManager.VERTICAL,false)
+            adapter=categoryAdapter
+
+
+        }
+    }
+
+    private fun observeCategoryLiveData() {
+        homeVM.observeCategoryLiveData().observe(viewLifecycleOwner, Observer {
+
+          categoryAdapter.setCategoryList(it)
+        })
     }
 
     private fun onPopularItemClick() {
@@ -103,7 +122,7 @@ class HomeFragment : Fragment() {
         homeVM.observePopularItemsLiveData().observe(viewLifecycleOwner
         ) { mealList->
 
-            popularItemsAdapter.setMeals(mealList as ArrayList<CategoryMeals>)
+            popularItemsAdapter.setMeals(mealList as ArrayList<MealsByCategory>)
         }
     }
 
@@ -134,6 +153,8 @@ class HomeFragment : Fragment() {
 
         })
     }
+
+
 
 
 }
