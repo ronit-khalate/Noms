@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.noms.ViewModel.HomeViewModel
+import com.example.noms.activites.CategoryMealActivity
 import com.example.noms.activites.MealActivity
 import com.example.noms.adapters.CategoriesAdapter
 import com.example.noms.adapters.MostPopularAdapter
@@ -38,6 +39,7 @@ class HomeFragment : Fragment() {
         const val MEAL_ID ="com.example.noms.fragments.idMeal"
         const val MEAL_NAME ="com.example.noms.fragments.nameMeal"
         const val MEAL_THUMB ="com.example.noms.fragments.thumbMeal"
+        const val CATEGORY_NAME="com.example.noms.fragments.catogryName"
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,11 +79,22 @@ class HomeFragment : Fragment() {
         homeVM.getCategories()
         observeCategoryLiveData()
 
+        onCategoryClick()
+
 
     }
 
+    private fun onCategoryClick() {
+        categoryAdapter.onItemClick={
+
+            val intent=Intent(activity,CategoryMealActivity::class.java)
+            intent.putExtra(CATEGORY_NAME,it.strCategory)
+            startActivity(intent)
+        }
+    }
+
     private fun prepareCategoriesRecylcerView() {
-        categoryAdapter=CategoriesAdapter()
+        categoryAdapter= CategoriesAdapter()
         binding.recViewCategories.apply {
             layoutManager=GridLayoutManager(context,3,GridLayoutManager.VERTICAL,false)
             adapter=categoryAdapter

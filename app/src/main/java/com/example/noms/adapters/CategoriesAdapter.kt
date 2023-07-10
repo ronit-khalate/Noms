@@ -12,6 +12,7 @@ import com.example.noms.pojo.Category
 class CategoriesAdapter():RecyclerView.Adapter<CategoriesAdapter.CategoryViewHolder>() {
 
     private var categoryList=ArrayList<Category>()
+    var onItemClick:((Category)->Unit)?=null
     inner class CategoryViewHolder(val binding: CategoryItemBinding):RecyclerView.ViewHolder(binding.root)
 
     fun setCategoryList(categoriesList: List<Category>){
@@ -36,5 +37,9 @@ class CategoriesAdapter():RecyclerView.Adapter<CategoriesAdapter.CategoryViewHol
             .load(categoryList[position].strCategoryThumb).into(holder.binding.imdCategory)
 
         holder.binding.tvCategoryName.text=categoryList[position].strCategory
+
+        holder.itemView.setOnClickListener {
+            onItemClick!!.invoke(categoryList[position])
+        }
     }
 }
