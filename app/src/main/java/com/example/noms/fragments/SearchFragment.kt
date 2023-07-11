@@ -1,5 +1,6 @@
 package com.example.noms.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.noms.R
 import com.example.noms.ViewModel.HomeViewModel
 import com.example.noms.activites.MainActivity
+import com.example.noms.activites.MealActivity
 import com.example.noms.adapters.MealsAdapter
 import com.example.noms.databinding.FragmentSearchBinding
 import kotlinx.coroutines.Job
@@ -39,6 +41,8 @@ class SearchFragment : Fragment() {
         return binding.root
     }
 
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -58,6 +62,8 @@ class SearchFragment : Fragment() {
                 viewModel.searchMeal(searchquery = searchQuery.toString())
             }
         }
+
+        onSearchedMealclick()
     }
 
     private fun observeSearchMealLiveData() {
@@ -73,6 +79,18 @@ class SearchFragment : Fragment() {
 
         if(searchQuery.isNotEmpty()){
             viewModel.searchMeal(searchQuery)
+        }
+    }
+
+    private fun onSearchedMealclick() {
+        searchRecyclerViewAdapter.onFavoriteItemClick={
+            val intent= Intent(activity, MealActivity::class.java)
+            intent.putExtra(HomeFragment.CATEGORY_NAME,it.strCategory)
+            intent.putExtra(HomeFragment.MEAL_NAME,it.strMeal)
+            intent.putExtra(HomeFragment.MEAL_THUMB,it.strMealThumb)
+            intent.putExtra(HomeFragment.MEAL_ID,it.idMeal)
+
+            startActivity(intent)
         }
     }
 
