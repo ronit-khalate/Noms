@@ -64,21 +64,17 @@ class MealActivity : AppCompatActivity() {
 
     private var mealToSave:Meal?=null
     private fun observerMealDetailsLiveData() {
-        mealMvvm.observMealDetailLiveData().observe(this,object :Observer<Meal>{
-            override fun onChanged(value: Meal) {
-                onResponseCase()
-                val meal=value
-                mealToSave=meal
-                binding.tvCategories.text="Category : ${meal.strCategory}"
-                binding.tvArea.text="Area : ${meal.strArea}"
-                binding.tvInstructionsStep.text=meal.strInstructions
+        mealMvvm.observMealDetailLiveData().observe(this
+        ) { value ->
+            onResponseCase()
+            val meal = value
+            mealToSave = meal
+            binding.tvCategories.text = "Category : ${meal.strCategory}"
+            binding.tvArea.text = "Area : ${meal.strArea}"
+            binding.tvInstructionsStep.text = meal.strInstructions
 
-                mealYouTubeLink=value.strYoutube.toString()
-
-            }
-
-
-        })
+            mealYouTubeLink = value.strYoutube.toString()
+        }
     }
 
     private fun setInfromationInViews() {

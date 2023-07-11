@@ -21,6 +21,7 @@ import com.example.noms.activites.MealActivity
 import com.example.noms.adapters.CategoriesAdapter
 import com.example.noms.adapters.MostPopularAdapter
 import com.example.noms.databinding.FragmentHomeBinding
+import com.example.noms.fragments.bottomsheet.MealBottomSheetFragment
 import com.example.noms.pojo.MealsByCategory
 import com.example.noms.pojo.Meal
 
@@ -82,7 +83,17 @@ class HomeFragment : Fragment() {
 
         onCategoryClick()
 
+        onPopularItemLongClick()
 
+
+    }
+
+    private fun onPopularItemLongClick() {
+        popularItemsAdapter.onLongItemclick={
+
+            val mealBottmSheetFragment = MealBottomSheetFragment.newInstance(it.idMeal)
+            mealBottmSheetFragment.show(childFragmentManager,"Meal Info")
+        }
     }
 
     private fun onCategoryClick() {

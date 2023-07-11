@@ -1,15 +1,10 @@
 package com.example.noms.activites
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import androidx.lifecycle.Observer
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.noms.R
 import com.example.noms.ViewModel.CategoriesMealViewModel
 import com.example.noms.adapters.CategoryMealAdapter
 import com.example.noms.databinding.ActivityCategoryMealBinding
