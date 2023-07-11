@@ -30,7 +30,22 @@ class HomeViewModel(
     private val favoriteMealsLiveData =mealDataBase.mealDao().getAllMeals()
     private var bottomSheetMealLiveData=MutableLiveData<Meal>()
     private val searchMealLiveData=MutableLiveData<List<Meal>>()
+
+    // for saving random meal in case of configuration change
+    private var savedStateRandomMeal:Meal?=null
+
     fun getRandomMeal(){
+
+        /*
+        * ? if savedStateRandomMeal is not null then it meas
+        * we already received random. then we just update randomMealLiveData
+        * and dont make api request
+        *
+        * */
+        savedStateRandomMeal?.let {
+            randomMealLiveData.postValue(it)
+            return
+        }
 
         RetrofitInstance.api.getRandomMeal().enqueue(object : Callback<MealList> {
             override fun onResponse(call: Call<MealList>, response: Response<MealList>) {
@@ -40,6 +55,7 @@ class HomeViewModel(
                     val randomMeal : Meal = response.body()!!.meals[0]
 
                     randomMealLiveData.value=randomMeal
+                    savedStateRandomMeal=randomMeal
 
                 }else{
 
