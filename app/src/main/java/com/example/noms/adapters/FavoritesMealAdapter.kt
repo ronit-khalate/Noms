@@ -11,6 +11,7 @@ import com.example.noms.pojo.Meal
 
 class FavoritesMealAdapter:RecyclerView.Adapter<FavoritesMealAdapter.FavoritesMealsViewHolder>() {
 
+    var onFavoriteItemClick :((Meal)->Unit)?=null
     inner class FavoritesMealsViewHolder(val binding:MealItemBinding):RecyclerView.ViewHolder(binding.root){
     }
 
@@ -48,6 +49,10 @@ class FavoritesMealAdapter:RecyclerView.Adapter<FavoritesMealAdapter.FavoritesMe
             .into(holder.binding.imgMeal)
 
         holder.binding.mealName.text=meal.strMeal
+        holder.itemView.setOnClickListener {
+
+            onFavoriteItemClick?.invoke(meal)
+        }
 
     }
 }

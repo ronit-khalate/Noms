@@ -21,13 +21,6 @@ class CategoryMealActivity : AppCompatActivity() {
     lateinit var categoryMealViewModel:CategoriesMealViewModel
     private lateinit var categoryMealAdapter: CategoryMealAdapter
 
-    companion object{
-
-        const val MEAL_ID ="com.example.noms.fragments.idMeal"
-        const val MEAL_NAME ="com.example.noms.fragments.nameMeal"
-        const val MEAL_THUMB ="com.example.noms.fragments.thumbMeal"
-        const val CATEGORY_NAME="com.example.noms.fragments.catogryName"
-    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding=ActivityCategoryMealBinding.inflate(layoutInflater)

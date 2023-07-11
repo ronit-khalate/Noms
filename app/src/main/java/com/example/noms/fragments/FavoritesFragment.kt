@@ -1,5 +1,6 @@
 package com.example.noms.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.noms.R
 import com.example.noms.ViewModel.HomeViewModel
 import com.example.noms.activites.MainActivity
+import com.example.noms.activites.MealActivity
 import com.example.noms.adapters.FavoritesMealAdapter
 import com.example.noms.databinding.FragmentFavoritesBinding
 import com.google.android.material.snackbar.Snackbar
@@ -77,6 +79,21 @@ class FavoritesFragment() : Fragment() {
         }
 
         ItemTouchHelper(itemTouchHelper).attachToRecyclerView(binding.rcFavorites)
+
+        onFavoriteItemClick()
+    }
+
+    private fun onFavoriteItemClick() {
+        favoritesMealAdapter.onFavoriteItemClick={
+
+            val intent=Intent(activity,MealActivity::class.java)
+            intent.putExtra(HomeFragment.CATEGORY_NAME,it.strCategory)
+            intent.putExtra(HomeFragment.MEAL_NAME,it.strMeal)
+            intent.putExtra(HomeFragment.MEAL_THUMB,it.strMealThumb)
+            intent.putExtra(HomeFragment.MEAL_ID,it.idMeal)
+
+            startActivity(intent)
+        }
     }
 
     private fun prepareRecyclerView() {
