@@ -48,7 +48,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/myfont"
-                android:text="what would you like to eat"
+                android:text="Today's Special"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_15sdp"
