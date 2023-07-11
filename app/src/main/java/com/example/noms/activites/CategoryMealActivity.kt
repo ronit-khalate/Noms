@@ -1,5 +1,6 @@
 package com.example.noms.activites
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -19,6 +20,14 @@ class CategoryMealActivity : AppCompatActivity() {
     lateinit var  binding:ActivityCategoryMealBinding
     lateinit var categoryMealViewModel:CategoriesMealViewModel
     private lateinit var categoryMealAdapter: CategoryMealAdapter
+
+    companion object{
+
+        const val MEAL_ID ="com.example.noms.fragments.idMeal"
+        const val MEAL_NAME ="com.example.noms.fragments.nameMeal"
+        const val MEAL_THUMB ="com.example.noms.fragments.thumbMeal"
+        const val CATEGORY_NAME="com.example.noms.fragments.catogryName"
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding=ActivityCategoryMealBinding.inflate(layoutInflater)
@@ -40,6 +49,20 @@ class CategoryMealActivity : AppCompatActivity() {
             categoryMealAdapter.notifyDataSetChanged()
 
 
+        }
+
+        onItemClicked()
+    }
+
+    private fun onItemClicked() {
+        categoryMealAdapter.onItemclick={
+            val intent = Intent(this,MealActivity::class.java)
+
+            intent.putExtra(HomeFragment.MEAL_ID,it.idMeal)
+            intent.putExtra(HomeFragment.MEAL_NAME,it.strMeal)
+            intent.putExtra(HomeFragment.MEAL_THUMB,it.strMealThumb)
+
+            startActivity(intent)
         }
     }
 
