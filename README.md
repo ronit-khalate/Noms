@@ -30,7 +30,7 @@ Follow these steps to get started with the Noms app:
 
 ## Demo Video
 
-[![Noms Demo Video](https://drive.google.com/uc?export=download&id=10mKbCq7akxtCtAPfx-xvIAzdZhhOUVSL)](https://drive.google.com/file/d/VIDEO_ID/view?usp=sharing)
+[![Noms Demo Video](https://drive.google.com/uc?export=download&id=10mKbCq7akxtCtAPfx-xvIAzdZhhOUVSL)](https://drive.google.com/file/d/10mKbCq7akxtCtAPfx-xvIAzdZhhOUVSL/view?usp=sharing)
 
 
 Click the image above to watch a demo video of the Noms app in action.
