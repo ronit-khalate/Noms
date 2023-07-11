@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="g_black">#33405f</color>
     <color name="g_loading">#fffafc</color>
+    <color name="g_grey">#B8B4B6</color>
 </resources>
