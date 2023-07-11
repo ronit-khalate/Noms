@@ -9,9 +9,10 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.noms.R
-import com.example.noms.ViewModel.MealVievModel
-import com.example.noms.databinding.ActivityMainBinding
+import com.example.noms.ViewModel.MealViewModel
+import com.example.noms.ViewModel.MealViewModelFactory
 import com.example.noms.databinding.ActivityMealBinding
+import com.example.noms.db.MealDataBase
 import com.example.noms.fragments.HomeFragment
 import com.example.noms.pojo.Meal
 
@@ -22,13 +23,14 @@ class MealActivity : AppCompatActivity() {
     private lateinit var mealThumb:String
     private lateinit var binding :ActivityMealBinding
     private lateinit var mealYouTubeLink:String
-    private lateinit var mealMvvm:MealVievModel
+    private lateinit var mealMvvm:MealViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding=ActivityMealBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        mealMvvm=ViewModelProvider(this)[MealVievModel::class.java]
+        val mealDataBase = MealDataBase.getInstance(this)
+        mealMvvm=ViewModelProvider(this,MealViewModelFactory(mealDataBase))[MealViewModel::class.java]
         getMealInformationFromIntent()
         setInfromationInViews()
 
@@ -37,6 +39,18 @@ class MealActivity : AppCompatActivity() {
         observerMealDetailsLiveData()
 
         onYouTubeImageclick()
+        onFavoriteClick()
+    }
+
+    private fun onFavoriteClick() {
+
+        binding.btnAddToFav.setOnClickListener {
+
+            mealToSave?.let {
+                mealMvvm.insertMeal(it)
+            }
+
+        }
     }
 
     private fun onYouTubeImageclick() {
@@ -48,12 +62,13 @@ class MealActivity : AppCompatActivity() {
         }
     }
 
+    private var mealToSave:Meal?=null
     private fun observerMealDetailsLiveData() {
         mealMvvm.observMealDetailLiveData().observe(this,object :Observer<Meal>{
             override fun onChanged(value: Meal) {
                 onResponseCase()
                 val meal=value
-
+                mealToSave=meal
                 binding.tvCategories.text="Category : ${meal.strCategory}"
                 binding.tvArea.text="Area : ${meal.strArea}"
                 binding.tvInstructionsStep.text=meal.strInstructions

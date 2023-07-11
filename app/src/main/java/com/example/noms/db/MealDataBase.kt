@@ -16,7 +16,7 @@ abstract class MealDataBase:RoomDatabase() {
     companion object{
 
         @Volatile
-        var INSTANCE:MealDataBase?=null
+        private var INSTANCE:MealDataBase?=null
 
         @Synchronized
         fun getInstance(context:Context):MealDataBase{

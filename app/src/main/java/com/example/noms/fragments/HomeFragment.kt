@@ -14,7 +14,9 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.noms.ViewModel.HomeViewModel
+import com.example.noms.ViewModel.HomeViewModelFactory
 import com.example.noms.activites.CategoryMealActivity
+import com.example.noms.activites.MainActivity
 import com.example.noms.activites.MealActivity
 import com.example.noms.adapters.CategoriesAdapter
 import com.example.noms.adapters.MostPopularAdapter
@@ -43,8 +45,7 @@ class HomeFragment : Fragment() {
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        homeVM = ViewModelProvider(this)[HomeViewModel::class.java]
-
+        homeVM=(activity as MainActivity).viewModel
         popularItemsAdapter= MostPopularAdapter()
 
 
